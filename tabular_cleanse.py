@@ -38,14 +38,17 @@ def canonicalize_tabs(line):
         else:
             # past preceding whitespace, so we're done
             break
-    # TOTHINK: should i have an "else" block in case it's all whitespace?
+    else:
+        # if we complete without any non-whitespace, just return
+        # a blank line
+        return ""
 
     indentation = ' ' * indenting_spaces
     return indentation + line.lstrip()
 
 def main():
     for line in sys.stdin:
-        print canonicalize_tabs(line),
+        print canonicalize_tabs(line.rstrip("\n"))
 
 if __name__ == '__main__':
     main()
